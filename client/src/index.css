@@ -15,4 +15,36 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Add responsive styling for the search container */
+.search-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Enhance search input styling */
+.search-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  border: 2px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+/* Improve button styling */
+.submit-button {
+  background-color: #4CAF50;
+  padding: 12px 24px;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+/* Add hover effects */
+.submit-button:hover {
+  background-color: #45a049;
 } 

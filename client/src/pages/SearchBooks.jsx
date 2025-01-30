@@ -11,6 +11,10 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   // Create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState([]);
+  // Create state for loading
+  const [isLoading, setIsLoading] = useState(false);
+  // Create state for error handling
+  const [error, setError] = useState('');
 
   // Set up mutation
   const [saveBook] = useMutation(SAVE_BOOK);
@@ -26,11 +30,7 @@ const SearchBooks = () => {
   // Handle search submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    if (!searchInput) {
-      return false;
-    }
-
+    setIsLoading(true);
     try {
       const response = await searchGoogleBooks(searchInput);
 
@@ -52,7 +52,10 @@ const SearchBooks = () => {
       setSearchedBooks(bookData);
       setSearchInput('');
     } catch (err) {
+      setError('Failed to search books. Please try again.');
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,6 +95,10 @@ const SearchBooks = () => {
           Submit Search
         </button>
       </form>
+
+      {isLoading && <div className="loading-spinner">Searching...</div>}
+
+      {error && <div className="error-message">{error}</div>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {searchedBooks.map((book) => (
